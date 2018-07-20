@@ -77,8 +77,7 @@ print.tkm <- function(x,...){
 plot.tkm <- function(x,data,...){
   p <- dim(as.matrix(data))[2]
   if (p==1){
-    require(fpc)
-    plotcluster(data,x$classification, ...)
+    fpc::plotcluster(data,x$classification, ...)
   }
   if (p==2){
 # Create the graphs for summarizing results
@@ -94,9 +93,8 @@ plot.tkm <- function(x,data,...){
     }
   }
   if (p>2){
-    require(fpc)
     cv <- x$classification<x$k+1
-    dcx <- discrcoord(data[cv,],x$classification[cv])
+    dcx <- fpc::discrcoord(data[cv,],x$classification[cv])
     dproj <- data %*% dcx$units
     pchs <- c(sapply(1:x$k,toString),"T")
     plot(dproj,col=x$classification,pch=pchs[x$classification],
